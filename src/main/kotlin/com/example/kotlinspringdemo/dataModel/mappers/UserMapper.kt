@@ -12,7 +12,6 @@ import java.util.*
 class UserMapper(
     private val userRepo: UserRepo
 ) {
-
     fun userDetailsToUserDetailsDTO(userDetails: UserDetails): UserDetailsDTO {
         return UserDetailsDTO(
             userDetails.id!!,

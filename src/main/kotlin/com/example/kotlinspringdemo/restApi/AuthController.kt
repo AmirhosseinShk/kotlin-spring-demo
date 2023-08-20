@@ -20,21 +20,6 @@ class AuthController(
     private val userService: UserService,
 ) {
 
-    @Operation(
-        summary = "Login User",
-        description = """
-            login User via Username and password
-            
-            don't need Authentication for this service.            
-            Http
-                Body:
-                    <loginDto>
-                        <username></username>
-                        <password></password>
-                    </loginDto>
-        """
-    )
-    @ApiResponses(value = [ApiResponse(responseCode = "200", description = "User login")])
     @PostMapping("/login")
     fun login(@RequestBody loginDto: LoginDto): LoginResponseDto {
         val user = userService.getUserByUsername(loginDto.username)
@@ -42,23 +27,6 @@ class AuthController(
         return LoginResponseDto(token)
     }
 
-    @Operation(
-        summary = "Register User",
-        description = """
-            Register User
-            
-            don't need Authentication for this service.            
-            Http
-                Body:
-                    <UserDetailsRegistrationDTO>
-                        <name></name>
-                        <userName></userName>
-                        <password></password>
-                        <emailAddress></emailAddress>
-                    </UserDetailsRegistrationDTO>
-        """
-    )
-    @ApiResponses(value = [ApiResponse(responseCode = "200", description = "User login")])
     @PostMapping("/register")
     fun userRegistration(@RequestBody userDetailsRegistrationDTO: UserDetailsRegistrationDTO): LoginResponseDto {
         val savedUser = userService.createUser(userDetailsRegistrationDTO)
