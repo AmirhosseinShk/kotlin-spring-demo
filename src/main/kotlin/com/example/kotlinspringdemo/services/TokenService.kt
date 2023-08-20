@@ -1,7 +1,6 @@
 package com.example.kotlinspringdemo.services
 
-import com.example.kotlinspringdemo.dataModel.users.UserDetails
-import com.example.kotlinspringdemo.dataModel.users.UserDetailsDTO
+import com.example.kotlinspringdemo.controllers.dto.users.UserDetailsDTO
 import org.springframework.security.oauth2.jwt.*
 import org.springframework.stereotype.Service
 import java.time.Instant

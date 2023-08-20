@@ -19,7 +19,5 @@ data class UserDetails(
 )
 
 enum class USERROLE {
-    ADMIN,
     USER,
-    GUEST,
 }

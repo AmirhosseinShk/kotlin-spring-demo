@@ -1,4 +1,4 @@
-package com.example.kotlinspringdemo.dataModel.auth
+package com.example.kotlinspringdemo.controllers.dto.auth
 
 data class LoginDto(
     val username: String,

@@ -1,8 +1,8 @@
 package com.example.kotlinspringdemo.services
 
 import com.example.kotlinspringdemo.dataModel.mappers.UserMapper
-import com.example.kotlinspringdemo.dataModel.users.UserDetailsDTO
-import com.example.kotlinspringdemo.dataModel.users.UserDetailsRegistrationDTO
+import com.example.kotlinspringdemo.controllers.dto.users.UserDetailsDTO
+import com.example.kotlinspringdemo.controllers.dto.users.UserDetailsRegistrationDTO
 import com.example.kotlinspringdemo.exceptions.DuplicatedUsernameException
 import com.example.kotlinspringdemo.exceptions.NotImplementedException
 import com.example.kotlinspringdemo.exceptions.UserNotFoundException

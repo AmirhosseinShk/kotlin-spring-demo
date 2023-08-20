@@ -1,7 +1,7 @@
-package com.example.kotlinspringdemo.restApi
+package com.example.kotlinspringdemo.controllers
 
-import com.example.kotlinspringdemo.dataModel.users.UserDetailsDTO
-import com.example.kotlinspringdemo.dataModel.users.UserDetailsRegistrationDTO
+import com.example.kotlinspringdemo.controllers.dto.users.UserDetailsDTO
+import com.example.kotlinspringdemo.controllers.dto.users.UserDetailsRegistrationDTO
 import com.example.kotlinspringdemo.services.UserService
 import org.springframework.web.bind.annotation.*
 

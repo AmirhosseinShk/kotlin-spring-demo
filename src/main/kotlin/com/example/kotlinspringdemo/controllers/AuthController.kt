@@ -1,13 +1,10 @@
-package com.example.kotlinspringdemo.restApi
+package com.example.kotlinspringdemo.controllers
 
-import com.example.kotlinspringdemo.dataModel.auth.LoginDto
-import com.example.kotlinspringdemo.dataModel.auth.LoginResponseDto
-import com.example.kotlinspringdemo.dataModel.users.UserDetailsRegistrationDTO
+import com.example.kotlinspringdemo.controllers.dto.auth.LoginDto
+import com.example.kotlinspringdemo.controllers.dto.auth.LoginResponseDto
+import com.example.kotlinspringdemo.controllers.dto.users.UserDetailsRegistrationDTO
 import com.example.kotlinspringdemo.services.TokenService
 import com.example.kotlinspringdemo.services.UserService
-import io.swagger.v3.oas.annotations.Operation
-import io.swagger.v3.oas.annotations.responses.ApiResponse
-import io.swagger.v3.oas.annotations.responses.ApiResponses
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping

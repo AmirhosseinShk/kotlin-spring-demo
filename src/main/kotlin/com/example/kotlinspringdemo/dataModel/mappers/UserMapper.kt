@@ -2,8 +2,8 @@ package com.example.kotlinspringdemo.dataModel.mappers
 
 import com.example.kotlinspringdemo.dataModel.users.USERROLE
 import com.example.kotlinspringdemo.dataModel.users.UserDetails
-import com.example.kotlinspringdemo.dataModel.users.UserDetailsDTO
-import com.example.kotlinspringdemo.dataModel.users.UserDetailsRegistrationDTO
+import com.example.kotlinspringdemo.controllers.dto.users.UserDetailsDTO
+import com.example.kotlinspringdemo.controllers.dto.users.UserDetailsRegistrationDTO
 import com.example.kotlinspringdemo.repository.UserRepo
 import org.springframework.stereotype.Component
 import java.util.*
