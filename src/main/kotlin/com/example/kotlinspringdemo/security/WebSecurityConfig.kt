@@ -47,17 +47,6 @@ class WebSecurityConfig(
                 it.anyRequest().authenticated()
             }
             .addFilterBefore(authenticationFilter, AnonymousAuthenticationFilter::class.java)
-        // Configure JWTw
-
-        http.oauth2ResourceServer {
-            it.jwt { t ->
-                t.authenticationManager { auth ->
-                    val jwt = auth as BearerTokenAuthenticationToken
-                    val user = tokenService.parseToken(jwt.token) ?: throw InvalidBearerTokenException("Invalid token")
-                    UsernamePasswordAuthenticationToken(user, "", listOf(SimpleGrantedAuthority("USER")))
-                }
-            }
-        }
 
         return http.build()
     }
