@@ -37,4 +37,14 @@ class ExceptionControllerAdvice {
         )
         return ResponseEntity(errorMessage, HttpStatus.BAD_REQUEST)
     }
+
+    @ExceptionHandler
+    fun handleIllegalStateException(ex: UsernameOrPasswordIncorrectException): ResponseEntity<ErrorMessageModel> {
+
+        val errorMessage = ErrorMessageModel(
+            HttpStatus.NOT_IMPLEMENTED.value(),
+            ex.message
+        )
+        return ResponseEntity(errorMessage, HttpStatus.UNAUTHORIZED)
+    }
 }

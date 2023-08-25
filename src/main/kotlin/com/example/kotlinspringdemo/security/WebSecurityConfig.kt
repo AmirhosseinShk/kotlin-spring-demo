@@ -63,9 +63,4 @@ class WebSecurityConfig(
         return source
     }
 
-    @Bean
-    fun bCryptPasswordEncoder(): BCryptPasswordEncoder {
-        return BCryptPasswordEncoder()
-    }
-
 }

@@ -6,13 +6,16 @@ import com.example.kotlinspringdemo.controllers.dto.users.UserDetailsRegistratio
 import com.example.kotlinspringdemo.exceptions.DuplicatedUsernameException
 import com.example.kotlinspringdemo.exceptions.NotImplementedException
 import com.example.kotlinspringdemo.exceptions.UserNotFoundException
+import com.example.kotlinspringdemo.exceptions.UsernameOrPasswordIncorrectException
 import com.example.kotlinspringdemo.repository.UserRepo
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
 class UserService(
     private val userRepo: UserRepo,
-    private val userMapper: UserMapper
+    private val userMapper: UserMapper,
+    private val bCryptPasswordEncoder: BCryptPasswordEncoder
 ) {
 
     fun createUser(userDetailsRegistrationDTO: UserDetailsRegistrationDTO): UserDetailsDTO {
@@ -42,11 +45,15 @@ class UserService(
         throw NotImplementedException("Update User not implemented Yet!")
     }
 
-    fun getUserByUsername(username: String): UserDetailsDTO {
+    fun getUserByUsernameAndCheckedPassword(username: String, password: String): UserDetailsDTO {
         val userDetails = userRepo.findByUserName(username)
-        if (userDetails.isPresent)
-            return userMapper.userDetailsToUserDetailsDTO(userDetails.get())
-        else
+        if (userDetails.isPresent) {
+            if (bCryptPasswordEncoder.matches(password, userDetails.get().hashPassword))
+                return userMapper.userDetailsToUserDetailsDTO(userDetails.get())
+            else
+                throw UsernameOrPasswordIncorrectException("Username or Password incorrect")
+        } else {
             throw UserNotFoundException("User id not found")
+        }
     }
 }

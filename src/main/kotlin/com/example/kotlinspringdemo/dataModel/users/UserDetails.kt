@@ -12,7 +12,7 @@ data class UserDetails(
     @Id val id: String? = null,
     val name: String,
     val userName: String,
-    val password: String,
+    val hashPassword: String,
     val emailAddress: String,
     val registrationDate: Date,
     val userRole: USERROLE
