@@ -1,6 +1,6 @@
-package com.example.kotlinspringdemo.controllers.dto.users
+package com.example.kotlinspringdemo.domain.dto.users
 
-import com.example.kotlinspringdemo.dataModel.users.USERROLE
+import com.example.kotlinspringdemo.domain.users.USERROLE
 import java.util.*
 
 data class UserDetailsDTO(

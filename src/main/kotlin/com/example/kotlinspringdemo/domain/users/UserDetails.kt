@@ -1,4 +1,4 @@
-package com.example.kotlinspringdemo.dataModel.users
+package com.example.kotlinspringdemo.domain.users
 
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue

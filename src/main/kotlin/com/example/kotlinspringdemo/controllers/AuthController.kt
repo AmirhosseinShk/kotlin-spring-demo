@@ -1,11 +1,10 @@
 package com.example.kotlinspringdemo.controllers
 
-import com.example.kotlinspringdemo.controllers.dto.auth.LoginDto
-import com.example.kotlinspringdemo.controllers.dto.auth.LoginResponseDto
-import com.example.kotlinspringdemo.controllers.dto.users.UserDetailsRegistrationDTO
+import com.example.kotlinspringdemo.domain.dto.auth.LoginDTO
+import com.example.kotlinspringdemo.domain.dto.auth.LoginResponseDTO
+import com.example.kotlinspringdemo.domain.dto.users.UserDetailsRegistrationDTO
 import com.example.kotlinspringdemo.services.TokenService
 import com.example.kotlinspringdemo.services.UserService
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -19,17 +18,17 @@ class AuthController(
 ) {
 
     @PostMapping("/login")
-    fun login(@RequestBody loginDto: LoginDto): LoginResponseDto {
+    fun login(@RequestBody loginDto: LoginDTO): LoginResponseDTO {
         val user = userService.getUserByUsernameAndCheckedPassword(loginDto.username, loginDto.password)
         val token = tokenService.createToken(user)
-        return LoginResponseDto(token)
+        return LoginResponseDTO(token)
     }
 
     @PostMapping("/register")
-    fun userRegistration(@RequestBody userDetailsRegistrationDTO: UserDetailsRegistrationDTO): LoginResponseDto {
+    fun userRegistration(@RequestBody userDetailsRegistrationDTO: UserDetailsRegistrationDTO): LoginResponseDTO {
         val savedUser = userService.createUser(userDetailsRegistrationDTO)
         val token = tokenService.createToken(savedUser)
-        return LoginResponseDto(token)
+        return LoginResponseDTO(token)
     }
 
 }

@@ -1,9 +1,9 @@
-package com.example.kotlinspringdemo.dataModel.mappers
+package com.example.kotlinspringdemo.domain.mappers
 
-import com.example.kotlinspringdemo.dataModel.users.USERROLE
-import com.example.kotlinspringdemo.dataModel.users.UserDetails
-import com.example.kotlinspringdemo.controllers.dto.users.UserDetailsDTO
-import com.example.kotlinspringdemo.controllers.dto.users.UserDetailsRegistrationDTO
+import com.example.kotlinspringdemo.domain.users.USERROLE
+import com.example.kotlinspringdemo.domain.users.UserDetails
+import com.example.kotlinspringdemo.domain.dto.users.UserDetailsDTO
+import com.example.kotlinspringdemo.domain.dto.users.UserDetailsRegistrationDTO
 import com.example.kotlinspringdemo.repository.UserRepo
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Component

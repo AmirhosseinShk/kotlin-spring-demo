@@ -1,6 +1,6 @@
 package com.example.kotlinspringdemo.services
 
-import com.example.kotlinspringdemo.controllers.dto.users.UserDetailsDTO
+import com.example.kotlinspringdemo.domain.dto.users.UserDetailsDTO
 import org.springframework.security.oauth2.jwt.*
 import org.springframework.stereotype.Service
 import java.time.Instant

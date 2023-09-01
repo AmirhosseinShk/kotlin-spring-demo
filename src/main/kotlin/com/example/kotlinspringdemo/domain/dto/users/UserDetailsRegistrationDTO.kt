@@ -1,4 +1,4 @@
-package com.example.kotlinspringdemo.controllers.dto.users
+package com.example.kotlinspringdemo.domain.dto.users
 
 data class UserDetailsRegistrationDTO(
     val name: String,
