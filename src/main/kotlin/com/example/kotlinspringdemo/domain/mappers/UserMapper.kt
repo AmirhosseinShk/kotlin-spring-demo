@@ -11,7 +11,6 @@ import java.util.*
 
 @Component
 class UserMapper(
-    private val userRepo: UserRepo,
     private val bCryptPasswordEncoder: BCryptPasswordEncoder
 ) {
     fun userDetailsToUserDetailsDTO(userDetails: UserDetails): UserDetailsDTO {
@@ -39,4 +38,5 @@ class UserMapper(
         )
     }
 
+    fun hashedUserDetailsPassword(password: String): String = bCryptPasswordEncoder.encode(password)
 }

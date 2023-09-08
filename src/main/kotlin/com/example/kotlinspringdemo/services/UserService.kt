@@ -3,10 +3,7 @@ package com.example.kotlinspringdemo.services
 import com.example.kotlinspringdemo.domain.mappers.UserMapper
 import com.example.kotlinspringdemo.domain.dto.users.UserDetailsDTO
 import com.example.kotlinspringdemo.domain.dto.users.UserDetailsRegistrationDTO
-import com.example.kotlinspringdemo.exceptions.DuplicatedUsernameException
-import com.example.kotlinspringdemo.exceptions.NotImplementedException
-import com.example.kotlinspringdemo.exceptions.UserNotFoundException
-import com.example.kotlinspringdemo.exceptions.UsernameOrPasswordIncorrectException
+import com.example.kotlinspringdemo.exceptions.*
 import com.example.kotlinspringdemo.repository.UserRepo
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
@@ -19,13 +16,17 @@ class UserService(
 ) {
 
     fun createUser(userDetailsRegistrationDTO: UserDetailsRegistrationDTO): UserDetailsDTO {
-        val userByUserName = userRepo.findByUserName(userDetailsRegistrationDTO.userName)
-        if (userByUserName.isPresent) {
-            throw DuplicatedUsernameException("this Username registered before!")
+        val userByUserName = userDetailsRegistrationDTO.userName?.let { userRepo.findByUserName(it) }
+        if (userByUserName != null) {
+            if (userByUserName.isPresent) {
+                throw DuplicatedUsernameException("this Username registered before!")
+            } else {
+                val userDetails = userMapper.userDetailsRegistrationDTOToUserDetails(userDetailsRegistrationDTO)
+                userRepo.save(userDetails)
+                return userMapper.userDetailsToUserDetailsDTO(userDetails)
+            }
         } else {
-            val userDetails = userMapper.userDetailsRegistrationDTOToUserDetails(userDetailsRegistrationDTO)
-            userRepo.save(userDetails)
-            return userMapper.userDetailsToUserDetailsDTO(userDetails)
+            throw UsernameNullException("Username can't be empty!!")
         }
     }
 
@@ -41,8 +42,23 @@ class UserService(
         return userRepo.findAll().stream().map(userMapper::userDetailsToUserDetailsDTO).toList()
     }
 
-    fun updateUser(): UserDetailsDTO {
-        throw NotImplementedException("Update User not implemented Yet!")
+    fun updateUser(id: String, userDetailsRegistrationDTO: UserDetailsRegistrationDTO): UserDetailsDTO {
+        val userDetails = userRepo.findById(id)
+        if (userDetails.isPresent) {
+            if (userDetailsRegistrationDTO.userName?.let { userRepo.findByUserName(it).isPresent } == true) {
+                throw DuplicatedUsernameException("this Username registered before!")
+            } else {
+                val updatedUserDetails = userDetails.get().copy(
+                    userName = userDetailsRegistrationDTO.userName.let { it } ?: userDetails.get().userName,
+                    name = userDetailsRegistrationDTO.name.let { it } ?: userDetails.get().name,
+                    emailAddress = userDetailsRegistrationDTO.emailAddress.let { it } ?: userDetails.get().emailAddress,
+                    hashPassword = userDetailsRegistrationDTO.password?.let { userMapper.hashedUserDetailsPassword(it) }
+                        ?: userDetails.get().hashPassword
+                )
+                return userMapper.userDetailsToUserDetailsDTO(userRepo.save(updatedUserDetails))
+            }
+        } else
+            throw UserNotFoundException("User id not found")
     }
 
     fun getUserByUsernameAndCheckedPassword(username: String, password: String): UserDetailsDTO {

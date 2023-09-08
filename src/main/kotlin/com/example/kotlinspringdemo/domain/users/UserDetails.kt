@@ -10,12 +10,12 @@ import java.util.Date
 data class UserDetails(
     @GeneratedValue(strategy = GenerationType.UUID)
     @Id val id: String? = null,
-    val name: String,
-    val userName: String,
-    val hashPassword: String,
-    val emailAddress: String,
-    val registrationDate: Date,
-    val userRole: USERROLE
+    val name: String?,
+    val userName: String?,
+    val hashPassword: String?,
+    val emailAddress: String?,
+    val registrationDate: Date?,
+    val userRole: USERROLE?
 )
 
 enum class USERROLE {

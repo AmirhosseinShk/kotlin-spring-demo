@@ -11,12 +11,12 @@ class UserController(
     private val userService: UserService
 ) {
 
-    @PostMapping("/updateInformation/{id}")
+    @PutMapping("/updateInformation/{id}")
     fun updateUserInformation(
         @PathVariable(name = "id") id: String,
         @RequestBody userDetailsRegistrationDTO: UserDetailsRegistrationDTO
     ): UserDetailsDTO {
-        return userService.updateUser();
+        return userService.updateUser(id, userDetailsRegistrationDTO)
     }
 
     @GetMapping("/getUserById/{id}")
